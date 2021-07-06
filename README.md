@@ -21,3 +21,5 @@ Postman Collection --> JerseyCRUD.postman_collection.json
     "countryCode": "FR"
 }
 ```
+
+Server : Tomcat 8.5
