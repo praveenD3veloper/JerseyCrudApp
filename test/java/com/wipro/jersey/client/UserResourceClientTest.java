@@ -47,16 +47,23 @@ public class UserResourceClientTest extends Mockito{
         User expected = new User();
         expected.setCountryName("United States of America");
         Client clientMock = mockClient(Response.Status.OK, expected);
-        String user = new UserResourceClient().fetchCountryName("US");
-        Assert.assertEquals(expected.getCountryName(), user );
+        UserResourceClient userclient = new UserResourceClient();
+        userclient.fetchCountryName("US");
+        Assert.assertEquals(200, userclient.statusCode);
+        
     }
 	
-//    @Test
-//    public void testGetTask0_OK() {
-//        User expected = new User();
-//        Client clientMock = mockClient(Response.Status.OK, expected);
-//        User t = new UserResourceClient(clientMock).fetchCountryName("US");
-//        Assert.assertEquals(t, expected);
-//    }
+	
+	@Test
+    public void testGetUser0_NOT_FOUND() {
+        User expected = new User();
+        expected.setCountryName("United States of America");
+        Client clientMock = mockClient(Response.Status.NOT_FOUND, expected);
+        UserResourceClient userclient = new UserResourceClient();
+        userclient.fetchCountryName("US");
+        Assert.assertEquals(404, userclient.statusCode);
+        
+    }
+	
 
 }

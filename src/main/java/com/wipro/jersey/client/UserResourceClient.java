@@ -14,7 +14,6 @@ import javax.ws.rs.core.Response;
 import org.glassfish.jersey.client.ClientConfig;
 import org.glassfish.jersey.logging.LoggingFeature;
 
-import com.wipro.jersey.model.RestCountries;
 import com.wipro.jersey.model.User;
 
 public class UserResourceClient {
@@ -37,6 +36,8 @@ public class UserResourceClient {
         this.client = client;
     }
 	
+	
+	static int statusCode;
   
 	public String fetchCountryName(String countryCode) {
 
@@ -45,11 +46,9 @@ public class UserResourceClient {
 		
 		Invocation.Builder invocationBuilder = webTarget.request();
 		Response response = invocationBuilder.get();
+
 		
-//		System.out.println(response.getStatus());
-//		System.out.println(response.readEntity(String.class));
-		
-		int statusCode = response.getStatus();
+		 statusCode = response.getStatus();
 
 		
 		if (statusCode == 200 ) {
