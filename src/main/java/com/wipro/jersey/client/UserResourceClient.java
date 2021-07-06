@@ -19,11 +19,29 @@ import com.wipro.jersey.model.User;
 
 public class UserResourceClient {
 	
+	private final Client client;
+	
+	private final static String baseUrl = "https://restcountries.eu/rest/v2/alpha/";
+	
+	private final static String queryParam = "?fields=name;";
+	
+	
+
+    public UserResourceClient() {
+		this.client = ClientBuilder.newClient();
+	}
+
+
+	public UserResourceClient(Client client) {
+        // create client instance
+        this.client = client;
+    }
+	
+  
 	public String fetchCountryName(String countryCode) {
 
 
-		Client client = ClientBuilder.newClient();
-		WebTarget webTarget = client.target("https://restcountries.eu/rest/v2/alpha/"+countryCode+"?fields=name;");
+		WebTarget webTarget = client.target(baseUrl+countryCode+queryParam);
 		
 		Invocation.Builder invocationBuilder = webTarget.request();
 		Response response = invocationBuilder.get();
